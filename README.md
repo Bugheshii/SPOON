@@ -2,6 +2,7 @@
 Little game I (and some internet friends) made, a lot like DOOM '93 but it's done in my own way. PLZ dont strike me it's a school project T_T
 
 ### 10/06/2025 ##
+
 Created THE game itself, tried to implement textures of walls but did't read the code through (was on macOS, it gave me cancer). 
 
                                                                     !!BUGS!!
