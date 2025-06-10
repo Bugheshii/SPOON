@@ -3,7 +3,8 @@ Little game I (and some internet friends) made, a lot like DOOM '93 but it's don
 
 ### 10/06/2025 ##
 Created THE game itself, tried to implement textures of walls but did't read the code through (was on macOS, it gave me cancer). 
-                                            !!BUGS!!
+
+                                                                    !!BUGS!!
 
 -  When you die, the restart freezes everything
 -  When you win, if you click on restart it freezes everything (again)
@@ -12,7 +13,7 @@ Created THE game itself, tried to implement textures of walls but did't read the
 -  Door texture = horrible
 -  The clicker is hidden on the main menu but when you go over the new game it shows, same thing on the you win and game over menus
 
-                                          !!Improvements!!
+                                                                !!Improvements!!
 
 -  better HUD
 -  random map every time you start the game
