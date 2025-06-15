@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPOON</title>
+    <link rel="stylesheet" href = "css/style.css">
+</head>
+<body>
+    <!-- Menu principale -->
+    <div id="mainMenu">
+        <h1>SPOON</h1>
+        <p style="margin-bottom: 30px; text-align: center; font-size: 1.2em;">
+            <small style="opacity: 0.7;">Usa WASD per muoverti, mouse per girare, click per sparare</small>
+        </p>
+        <button id="startButton" class="menu-button">NUOVA PARTITA</button>
+    </div>
+
+    <!-- Container di gioco -->
+    <div id="gameContainer">
+        <!-- Canvas principale -->
+        <canvas id="canvas"></canvas>
+
+        <!-- Crosshair -->
+        <div id="crosshair"></div>
+
+        <!-- Muzzle flash -->
+        <div id="muzzleFlash"></div>
+
+        <!-- Overlay danno -->
+        <div id="damageOverlay"></div>
+
+        <!-- Indicatore powerup -->
+        <div id="powerupIndicator">⚡ POTENZIAMENTO ATTIVO ⚡</div>
+
+        <!-- HUD -->
+        <div id="hud">
+            <!-- Statistiche giocatore -->
+            <div class="hud-section">
+                <div class="stat-bar">
+                    <div class="stat-fill health-fill" id="healthFill" style="width: 100%"></div>
+                    <div class="stat-text">❤️ <span id="health">100</span></div>
+                </div>
+                <div class="stat-bar">
+                    <div class="stat-fill armor-fill" id="armorFill" style="width: 0%"></div>
+                    <div class="stat-text">🛡️ <span id="armor">0</span></div>
+                </div>
+            </div>
+
+            <!-- Arma corrente -->
+            <div class="hud-section weapon-display">
+                <div style="font-size: 1.5em; font-weight: bold;">
+                    <span id="weaponIcon">PUGNI</span>
+                </div>
+                <div id="weaponName">PUGNI</div>
+                <div class="stat-bar">
+                    <div class="stat-fill ammo-fill" id="ammoFill" style="width: 100%"></div>
+                    <div class="stat-text">🔫 <span id="ammo">∞</span></div>
+                </div>
+                <div class="weapon-slots">
+                    <div class="weapon-slot active" data-weapon="1">1</div>
+                    <div class="weapon-slot" data-weapon="2">2</div>
+                    <div class="weapon-slot" data-weapon="3">3</div>
+                    <div class="weapon-slot" data-weapon="4">4</div>
+                    <div class="weapon-slot" data-weapon="5">5</div>
+                </div>
+            </div>
+
+            <!-- Informazioni missione -->
+            <div class="hud-section">
+                <div class="kill-counter">
+                    Nemici: <span id="kills">0</span>/<span id="totalEnemies">6</span>
+                </div>
+                <div id="keyStatus">🗝️ Chiave: <span style="color: #ff0000">NO</span></div>
+                <div style="font-size: 0.9em; opacity: 0.8;">
+                    E - Usa | R - Ricarica<br>
+                    1-5 - Armi
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Schermata Game Over -->
+    <div id="gameOverScreen" class="overlay-screen">
+        <h2>GAME OVER</h2>
+        <p style="font-size: 1.2em; margin-bottom: 30px;">Sei stato sconfitto!</p>
+        <button id="restartButton" class="menu-button">RIPROVA</button>
+    </div>
+
+    <!-- Schermata Vittoria -->
+    <div id="victoryScreen" class="overlay-screen">
+        <h2 style="color: #00ff00;">VITTORIA!</h2>
+        <p style="font-size: 1.2em; margin-bottom: 30px;">Hai sconfitto tutti i nemici!</p>
+        <button id="victoryRestartButton" class="menu-button">NUOVA PARTITA</button>
+    </div>
+
+    <!-- Import del motore principale come modulo -->
+    <script type="module" src="scripts/DoomEngine.js"></script>
+</body>
+</html>

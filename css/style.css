@@ -1,0 +1,270 @@
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #000;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        #mainMenu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #8B0000, #000);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        #mainMenu h1 {
+            font-size: 4em;
+            color: #ff0000;
+            text-shadow: 0 0 20px #ff0000;
+            margin-bottom: 30px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px #ff0000; }
+            to { text-shadow: 0 0 30px #ff0000, 0 0 40px #ff0000; }
+        }
+
+        .menu-button {
+            background: #8B0000;
+            color: #fff;
+            border: 2px solid #ff0000;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            font-family: inherit;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s;
+        }
+
+        .menu-button:hover {
+            background: #ff0000;
+            box-shadow: 0 0 15px #ff0000;
+        }
+
+        #gameContainer {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: none;
+        }
+
+        #canvas {
+            display: block;
+            /*cursor: none;*/
+            background: #000;
+        }
+
+        #hud {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 140px;
+            background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.8));
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .hud-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .stat-bar {
+            width: 120px;
+            height: 20px;
+            background: #333;
+            border: 2px solid #fff;
+            position: relative;
+        }
+
+        .stat-fill {
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+
+        .health-fill { background: #00ff00; }
+        .armor-fill { background: #0088ff; }
+        .ammo-fill { background: #ffaa00; }
+
+        .stat-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px #000;
+        }
+
+        .weapon-display {
+            text-align: center;
+        }
+
+        .weapon-slots {
+            display: flex;
+            gap: 5px;
+            margin-top: 10px;
+        }
+
+        .weapon-slot {
+            width: 40px;
+            height: 40px;
+            background: #333;
+            border: 2px solid #666;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .weapon-slot:hover {
+            border-color: #fff;
+        }
+
+        .weapon-slot.active {
+            background: #ff0000;
+            border-color: #fff;
+        }
+
+        .kill-counter {
+            text-align: center;
+            font-size: 1.2em;
+        }
+
+        #crosshair {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2" fill="none" stroke="red" stroke-width="2"/><line x1="12" y1="2" x2="12" y2="6" stroke="red" stroke-width="2"/><line x1="12" y1="18" x2="12" y2="22" stroke="red" stroke-width="2"/><line x1="2" y1="12" x2="6" y2="12" stroke="red" stroke-width="2"/><line x1="18" y1="12" x2="22" y2="12" stroke="red" stroke-width="2"/></svg>') center/contain no-repeat;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        #muzzleFlash {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(255,255,0,0.8) 0%, rgba(255,100,0,0.6) 50%, transparent 100%);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.1s;
+            z-index: 5;
+        }
+
+        #damageOverlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, transparent 30%, rgba(255,0,0,0.3) 100%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 8;
+        }
+
+        #powerupIndicator {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,255,0,0.8);
+            color: #000;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1.2em;
+            display: none;
+            z-index: 15;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.1); }
+        }
+
+        .overlay-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .overlay-screen h2 {
+            font-size: 3em;
+            margin-bottom: 30px;
+            color: #ff0000;
+            text-shadow: 0 0 20px #ff0000;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .blood-particle {
+            background: #ff0000 !important;
+        }
+
+        .wall-particle {
+            background: #888 !important;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            #hud {
+                height: 100px;
+                padding: 10px;
+            }
+            
+            .hud-section {
+                gap: 5px;
+            }
+            
+            .stat-bar {
+                width: 80px;
+                height: 15px;
+            }
+            
+            .weapon-slot {
+                width: 30px;
+                height: 30px;
+                font-size: 0.8em;
+            }
+        }
